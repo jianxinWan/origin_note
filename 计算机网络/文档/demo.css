@@ -1,0 +1,13 @@
+body {
+  width: 700px;
+  margin: 0 auto;
+  font-size: 0.8em;
+  color: #353535;
+  padding-bottom: 100px;
+}
+img {
+  width: 100%;
+}
+img:last-child{
+  display: none;
+}

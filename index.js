@@ -1,0 +1,1 @@
+var url = ['/a.html','b.html','c.html'];

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #left,#main,#right{
+            height: 100%;
+        }
+        /* 浮动加绝对定位 */
+        #left{
+            width: 300px;
+            background-color: yellow;
+            float: left;
+        }
+        #right{
+            position: absolute;
+            top:0;
+            right:0;
+            width: 300px;
+            background-color: grey;
+        }
+        #main{
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: green;
+        }
+        /* 浮动实现
+        
+            我们设置左边左浮动，右边右浮动，中间通过外边距空出中间位置
+            */
+        #left{
+            width: 300px;
+            background-color: yellow;
+            float: left;
+        }
+        #right{
+            float: right;
+            width: 300px;
+            background-color: grey;
+        }
+        #main{
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id = "left">
+    </div>
+    <div id = "main">
+    </div>
+    <div id = "right">
+    </div>
+</body>
+</html>

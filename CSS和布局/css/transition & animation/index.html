@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height:100%;
+        }
+        /* transition实现过度 */
+        .move{
+            position: absolute;
+            top:100px;
+            left:100px;
+            width: 200px;
+            height: 200px;
+            background-color: rgb(255,49,49);
+            transition: left .5s linear,top .5s linear;
+        }
+        .move:hover{
+            top:150px;
+            left:150px;
+        }
+
+        /* animation实现动画 */
+        /* .move{
+            position: absolute;
+            top:100px;
+            left:100px;
+            width: 200px;
+            height: 200px;
+            -webkit-animation:slide 1s ease-in-out infinite;
+            background-color: yellowgreen;
+        }
+        @keyframes slide{
+            0%{
+                opacity: 0;
+                transform: translateY(0%);
+            }
+            66%{
+                opacity: 1;
+                transform: translateY(100%);
+            }
+            100%{
+                opacity: 0;
+                transform: translateY(0%);
+            }
+        } */
+    </style>
+</head>
+<body>
+    <div class="move">
+
+    </div>
+</body>
+</html>

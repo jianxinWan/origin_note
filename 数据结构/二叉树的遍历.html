@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var tree = {
+            value:'-',
+            left:{
+                value:'+',
+                left:{
+                    value:'a'
+                },
+                right:{
+                    value:'*',
+                    left:{
+                        value:'b'
+                    },
+                    right:{
+                        value:'c'
+                    }
+                }
+            },
+            right:{
+                value:'/',
+                left:{
+                    value:'d'
+                },
+                right:{
+                    value:'e'
+                }
+            }
+        }
+        var preListArr = [];
+        var preListStack = [];
+        var inListArr = [];
+        var inListStack = [];
+        var afterListArr = [];
+        var afterListStack = [];
+        var breadthList = [];
+        //递归形式
+        function PreList(node){
+            if(node){
+                preListArr.push(node.value);
+                PreList(node.left);
+                PreList(node.right);
+            }
+        }
+        function PreMethodsStack(node){
+            if(node){
+                var stack = [node];
+                var itemList = [];
+                while(stack.length!==0){
+                    node = stack.pop();
+                    preListStack.push(node.value);
+                    if(node.right) stack.push(node.right);
+                    if(node.left) stack.push(node.left);
+                }
+            }
+        }
+        function inOrderUnRec(node){
+            if(node){
+                inOrderUnRec(node.left);
+                inListArr.push(node.value);
+                inOrderUnRec(node.right);
+            }
+        }
+
+        function inOrderStack(node){
+            if(node){
+                var stack = [];
+                while(stack.length!==0 ||node){
+                    if(node){
+                        stack.push(node);
+                        node = node.left;    
+                    }else{
+                        node = stack.pop();
+                        inListStack.push(node.value);
+                        node = node.rightl;   
+                    }
+                }
+            }
+        }
+
+        function postListRec(node){
+            if(node){
+                postListRec(node.left);
+                postListRec(node.right);
+                afterListArr.push(node.value);
+            }
+        }
+        function afterStack(node){
+            if(node){
+                var stack = [node];
+                var temp = null;
+                while(stack.length!==0){
+                    temp = stack[stack.length-1];
+                    if(temp.left && node!==temp.left && node!== temp.right){
+                        stack.push(temp.left);
+                    }else if(temp.right && node!==temp.right){                       
+                        stack.push(temp.right);
+                    }else{
+                        afterListStack.push(stack.pop().value);
+                        node = temp;
+                        if(!node.left && !node.right){
+                            var str = "";
+                            for(let i=0;i<stack.length;i++){
+                                str += stack[i].value;
+                            }
+                            console.log(str+node.value);
+                        }
+                    }
+                }
+            }
+        }
+        //层次遍历
+        //通过队列进行存储
+        function breadthTraversal (node){
+            if(node){
+                var que = [node];
+                while(que.length!==0){
+                    node  = que.shift();
+                    breadthList.push(node.value);
+                    if(node.left) que.push(node.left);
+                    if(node.right) que.push(node.right);
+                }
+            }
+        }
+    
+        // PreList(tree);
+        PreMethodsStack(tree);
+        // //中序遍历
+        // inOrderUnRec(tree); 
+        // inOrderStack(tree);
+        // //后续遍历
+        // postListRec(tree);
+        afterStack(tree);
+        // breadthTraversal(tree);
+
+        // console.log(...preListArr);
+        console.log(...preListStack);
+        // console.log("中序遍历");
+        // console.log(...inListArr);
+        // console.log(...inListStack);
+        // console.log("后序遍历");
+        // console.log(...afterListArr);
+        console.log(...afterListStack);
+        // console.log("层次遍历");
+        // console.log(...breadthList);
+    </script>
+</body>
+</html>

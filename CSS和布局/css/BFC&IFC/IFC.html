@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body,html{
+            width: 100%;
+            height:100%;
+        }
+        /* 水平居中 */
+        .parent{
+            width: 300px;
+            height: 200px;
+            background-color: aqua;
+            text-align: center;
+        }
+        .child1{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+        }
+        /* 垂直居中 */
+        .parent{
+            width: 300px;
+            background-color: aqua;
+        }
+        .child1,.child2,.child3{
+            display: inline-block;
+        }
+        .child1{
+            width: 50px;
+            height: 200px;
+            vertical-align: middle;
+        }
+        .child2{
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+        }
+        .child3{
+            top:50px;
+            width: 100px;
+            height: 100px;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child1"></div>
+        <div class="child2"></div>
+        <div class="child3"></div>
+    </div>
+</body>
+</html>

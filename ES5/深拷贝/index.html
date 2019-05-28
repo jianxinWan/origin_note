@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function deepClone(obj){
+            let objClone = Array.isArray(obj)?[]:{};
+            if(obj && typeof obj === "object"){
+                for(key in obj){
+                    if(obj.hasOwnProperty(key)){
+                        if(obj[key] && typeof obj[key] === "object"){
+                            objClone = deepClone(obj[key]);
+                        }else{
+                            objClone[key] = obj[key];
+                        }
+                    }
+                }
+            }
+            return objClone;
+        }
+        //将对象转换为字符串，存在的问题在于我们转换的对象必须是一个严格的JSON格式的对象，否则会出现问题，这个方法只能处理简单属性和简单属性的数组，但是再实现复制的过程中，我们的constructor属性丢失了。
+        
+
+        JSON.parse(JSON.stringify());
+        let a = [1,2,3,4];
+        let b = a;
+        let c = deepClone(a);
+        a[2] = 1000;
+        console.log(a,b,c);
+    </script>
+</body>
+</html>

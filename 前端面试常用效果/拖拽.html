@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .move{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="move"></div>
+    <script>
+        const moveTarget = document.getElementsByClassName('move')[0];
+        dragBar.onmousedown = function(ev) {
+            let oEvent = ev || event;
+            //求出鼠标和box的位置差值
+            let x = oEvent.clientX - ev.target.offsetLeft;
+            let y = oEvent.clientY - ev.target.offsetTop;
+            document.onmousemove = function(ev) {
+                var oEvent = ev || event;
+                //只能拖动窗口标题才能移动
+                if(oEvent.target!=tit){
+                    return;
+                }
+                //保证拖拽框一直保持在浏览器窗口内部，不能被拖出的浏览器窗口的范围
+                var l = oEvent.clientX - x;
+                var t = oEvent.clientY - y;
+                if(l < 0) {
+                    l = 0;
+
+                } else if(l > document.documentElement.clientWidth - box.offsetWidth) {
+                    l = document.documentElement.clientWidth - box.offsetWidth;
+                }
+                if(t < 0) {
+                    t = 0;
+                } else if(t > document.documentElement.clientHeight - box.offsetHeight) {
+                    t = document.documentElement.clientHeight - box.offsetHeight;
+                }
+                box.style.left = l + "px";
+                box.style.top = t + "px";
+            }
+            //鼠标抬起的函数
+            document.onmouseup = function() {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+            //火狐浏览器在拖拽空div时会出现bug
+            //return false阻止默认事件，解决火狐的bug
+            return false;
+        }
+    </script>
+</body>
+</html>
