@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>drag</title>
+  <style>
+    .drag {
+      position: absolute;
+      left: 300px;
+      top: 300px;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+  <script src="throttle.js"></script>
+  <script src="debounce.js"></script>
+</head>
+
+<body>
+  <div class="drag"></div>
+  <input id="name" />
+  <script>
+    /*拖拽*/
+    function drag() {
+      let draging = false
+      let clickX = 0
+      let clickY = 0
+      let targetLeft = 0
+      let targetTop = 0
+      let moveX = 0
+      let moveY = 0
+      const target = document.getElementsByClassName('drag')[0]
+      const scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+      const scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+      const pageWidth = document.documentElement.clientWidth || document.body.clientWidth
+      const pageHeight = document.documentElement.clientHeight || document.body.clientHeight
+      target.addEventListener('mousedown', (e) => {
+        draging = true
+        const event = e || window.event
+        clickX = event.pageX || event.clientX + event.scrollX
+        clickY = event.pageY || event.clientY + event.scrollY
+        targetLeft = e.currentTarget.getBoundingClientRect().left;
+        targetTop = e.currentTarget.getBoundingClientRect().top;
+      }, false)
+
+      document.addEventListener('mousemove', throttle((e) => {
+        if (draging) {
+          const event = e || window.event
+          moveX = (event.pageX || event.clickX + scrollX) - clickX
+          moveY = (event.pageY || event.clickY + scrollY) - clickY
+          target.style.left =
+            (targetLeft + moveX) >= 0 ?
+            (targetLeft + moveX) <= pageWidth ?
+            `${targetLeft + moveX}px` : `${pageWidth}px` : 0
+          target.style.top =
+            (targetTop + moveY) >= 0 ?
+            (targetTop + moveX) <= pageHeight ?
+            `${targetTop + moveY}px` : `${pageHeight}px` : 0
+        }
+      }, 30), false)
+      document.addEventListener('mouseup', () => {
+        draging = false
+      }, false)
+    }
+    drag()
+
+    /*
+     * input 输入，添加防抖
+     */
+    function input() {
+      document.getElementById('name').addEventListener('input', debounce((e) => {
+        console.log(e.target.value)
+      }, 380), false)
+    }
+    input()
+  </script>
+</body>
+
+</html>
